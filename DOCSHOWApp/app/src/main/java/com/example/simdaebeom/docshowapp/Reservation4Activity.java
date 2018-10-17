@@ -1,0 +1,83 @@
+package com.example.simdaebeom.docshowapp;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class Reservation4Activity extends AppCompatActivity {
+
+    private String doctorID;
+    private String doctorName;
+    private String hospitalID;
+    private String date;
+    private String userID;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_reser4);
+        Intent getintent = getIntent();
+
+        doctorID = getintent.getExtras().getString("doctorID");
+        doctorName = getintent.getExtras().getString("doctorName");
+        hospitalID = getintent.getExtras().getString("hospitalID");
+        date = getintent.getExtras().getString("date");
+        userID =getintent.getExtras().getString("userID");
+//         ArrayList<String> items = new ArrayList<String>() ;
+//         timeset(items);
+//
+//         ListAdapter adapter = new TimeAdapter(this,items);
+
+        ListView listView = (ListView)findViewById(R.id.timeList);
+        final ArrayList<String> timeList = new ArrayList<String>();
+        timeset(timeList);
+        ListAdapter adapter = new TimeAdapter(this,timeList);
+        listView.setAdapter(adapter);
+        TextView doctorNameTextview = (TextView)findViewById(R.id.doctorName);
+        TextView dateTextview = (TextView)findViewById(R.id.date);
+
+        doctorNameTextview.setText(getintent.getExtras().getString("doctorName")+" 선생님");
+        dateTextview.setText(getintent.getExtras().getString("date"));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(Reservation4Activity.this, PayActivity.class);
+                intent.putExtra("doctorID", doctorID);
+                intent.putExtra("doctorName",doctorName);
+                intent.putExtra("hospitalID",hospitalID);
+                intent.putExtra("date",date+timeList.get(position));
+                intent.putExtra("userID", userID);
+
+                Reservation4Activity.this.startActivity(intent);
+            }
+        });
+
+
+
+    }
+
+    public void timeset(ArrayList<String> timeList){
+        timeList.add(" 09:00");
+        timeList.add(" 10:00");
+        timeList.add(" 11:00");
+        timeList.add(" 13:00");
+        timeList.add(" 14:00");
+        timeList.add(" 15:00");
+;
+
+    }
+}

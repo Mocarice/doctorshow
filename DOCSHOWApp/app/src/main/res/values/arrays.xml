@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="doctor">
+        <item>김민수 선생님</item>
+        <item>김철수 선생님</item>
+        <item>김갑수 선생님</item>
+        <item>김진수 선생님</item>
+        <item>김현수 선생님</item>
+    </string-array>
+    <string-array name="year">
+        <item>연도 선택</item>
+        <item>2010 년</item>
+        <item>2011 년</item>
+        <item>2012 년</item>
+        <item>2013 년</item>
+        <item>2014 년</item>
+        <item>2015 년</item>
+        <item>2016 년</item>
+        <item>2017 년</item>
+        <item>2018 년</item>
+    </string-array>
+
+    <string-array name="month">
+        <item>월 선택</item>
+        <item> 1월 </item>
+        <item> 2월 </item>
+        <item> 3월 </item>
+        <item> 4월 </item>
+        <item> 5월 </item>
+        <item> 6월 </item>
+        <item> 7월 </item>
+        <item> 8월 </item>
+        <item> 9월 </item>
+        <item> 10월 </item>
+        <item> 11월 </item>
+        <item> 12월 </item>
+
+
+    </string-array>
+
+    <string-array name="time">
+        <item>시간대 선택</item>
+        <item>9:00-10:00</item>
+        <item>10:00-11:00</item>
+        <item>11:00-12:00</item>
+        <item>13:00-14:00</item>
+        <item>14:00-15:00</item>
+        <item>15:00-16:00</item>
+    </string-array>
+</resources>
