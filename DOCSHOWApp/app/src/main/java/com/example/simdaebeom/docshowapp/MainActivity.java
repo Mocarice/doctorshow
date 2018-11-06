@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 //        TextView idText = (TextView) findViewById(R.id.idText);
 //        String userID = intent.getStringExtra("userID");
 
-        Button reservationButton = (Button)findViewById(R.id.reservationButton);
+        final Button reservationButton = (Button)findViewById(R.id.reservationButton);
         reservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

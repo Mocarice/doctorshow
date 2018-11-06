@@ -1,6 +1,8 @@
+/////////////////////
 package com.example.simdaebeom.docshowapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,8 +29,12 @@ public class PayActivity extends AppCompatActivity {
     private String doctorID;
     private String doctorName;
     private String hospitalID;
-    private String date;
+    private String time;
+    private String year;
+    private String month;
+    private String day;
     private String reservationNumber;
+    private String date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,20 +46,24 @@ public class PayActivity extends AppCompatActivity {
 
         doctorID = getintent.getExtras().getString("doctorID");
         doctorName = getintent.getExtras().getString("doctorName");
-        date = getintent.getExtras().getString("date");
+        time = getintent.getExtras().getString("time");
+        year = getintent.getExtras().getString("year");
+        month = getintent.getExtras().getString("month");
+        day = getintent.getExtras().getString("day");
         userID =getintent.getExtras().getString("userID");
-        reservationNumber = doctorID+date;
         hospitalID = getintent.getExtras().getString("hospitalID");
+        date = year+"-"+month+"-"+day;
 
+        String[] splitTime = time.split(":");
+        reservationNumber = doctorID+year+month+day+splitTime[0]+splitTime[1];
 
-        doctorNameTextView.setText(getintent.getExtras().getString("doctorName")+" 선생님");
-        dateTextView.setText(getintent.getExtras().getString("date"));
+        doctorNameTextView.setText(doctorName+" 선생님");
+        dateTextView.setText(date+" "+time);
 
         Button payButton = (Button)findViewById(R.id.payButton);
         payButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//                     Toast.makeText(getApplicationContext(), userID, Toast.LENGTH_LONG).show();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -64,19 +74,21 @@ public class PayActivity extends AppCompatActivity {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
                             if(success){
-                                AlertDialog.Builder builder = new AlertDialog.Builder(PayActivity.this);
-                                builder.setMessage("예약이 완료되었습니다.")
-                                        .setPositiveButton("확인",null)
-                                        .create()
-                                        .show();
-                                finish();
+
+                                Intent payIntent = new Intent(PayActivity.this,Pay2Activity.class);
+                                PayActivity.this.startActivity(payIntent);
+
+
                             }
                             else{
                                 AlertDialog.Builder builder = new AlertDialog.Builder(PayActivity.this);
-                                builder.setMessage("예약이 실패했습니다..")
+                                builder.setMessage("예약이 실패했습니다.")
                                         .setNegativeButton("다시 시도",null)
                                         .create()
                                         .show();
+
+
+
 
                             }
                         }
@@ -87,11 +99,17 @@ public class PayActivity extends AppCompatActivity {
 
                     }
                 };
-                    ReservationRequest reservationRequest = new ReservationRequest(reservationNumber,doctorID,userID,date,responseListener);
-                    RequestQueue queue = Volley.newRequestQueue(PayActivity.this);
-                      queue.add(reservationRequest);
+
+                //  Intent intent = new Intent(PayActivity.this, MainActivity.class);
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.naver.com"));
+//                PayActivity.this.startActivity(intent);
+                ReservationRequest reservationRequest = new ReservationRequest(reservationNumber,doctorID,userID,date,time,responseListener);
+                RequestQueue queue = Volley.newRequestQueue(PayActivity.this);
+                queue.add(reservationRequest);
+
             }
         });
 
     }
 }
+

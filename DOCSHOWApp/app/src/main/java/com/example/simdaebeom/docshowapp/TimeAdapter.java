@@ -28,6 +28,5 @@ public class TimeAdapter extends ArrayAdapter<String>{
         TextView textView = (TextView) view.findViewById(R.id.time);
         textView.setText(item);
         return view;
-
     }
 }

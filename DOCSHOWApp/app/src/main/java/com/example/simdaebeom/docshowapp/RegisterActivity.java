@@ -43,7 +43,7 @@ public class  RegisterActivity extends AppCompatActivity {
                String userID = idText.getText().toString();
                String userPassword = passwordText.getText().toString();
                String userName = nameText.getText().toString();
-               int userAge = Integer.parseInt(ageText.getText().toString());
+               int userBirth = Integer.parseInt(ageText.getText().toString());
 
                Response.Listener<String> responseListener = new Response.Listener<String>() {
                    @Override
@@ -71,7 +71,7 @@ public class  RegisterActivity extends AppCompatActivity {
                    }
 
                };
-               RegisterRequest registerRequest = new RegisterRequest(userID,userPassword,userName,userAge,responseListener);
+               RegisterRequest registerRequest = new RegisterRequest(userID,userPassword,userName,userBirth,responseListener);
                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                queue.add(registerRequest);
 

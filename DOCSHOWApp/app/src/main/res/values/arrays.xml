@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="doctor">
-        <item>김민수 선생님</item>
-        <item>김철수 선생님</item>
-        <item>김갑수 선생님</item>
-        <item>김진수 선생님</item>
-        <item>김현수 선생님</item>
-    </string-array>
+
     <string-array name="year">
         <item>연도 선택</item>
         <item>2010 년</item>
@@ -39,13 +33,4 @@
 
     </string-array>
 
-    <string-array name="time">
-        <item>시간대 선택</item>
-        <item>9:00-10:00</item>
-        <item>10:00-11:00</item>
-        <item>11:00-12:00</item>
-        <item>13:00-14:00</item>
-        <item>14:00-15:00</item>
-        <item>15:00-16:00</item>
-    </string-array>
 </resources>

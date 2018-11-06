@@ -4,7 +4,7 @@ public class User {
     String userID;
     String userPassword;
     String userName;
-    String userAge;
+    String userBirth;
 
     public String getUserID() {
         return userID;
@@ -30,20 +30,20 @@ public class User {
         this.userName = userName;
     }
 
-    public String getUserAge() {
-        return userAge;
+    public String getUserBirth() {
+        return userBirth;
     }
 
-    public void setUserAge(String userAge) {
-        this.userAge = userAge;
+    public void setUserBirth(String userBirth) {
+        this.userBirth = userBirth;
     }
 
-    public User(String userID, String userPassword, String userName, String userAge) {
+    public User(String userID, String userPassword, String userName, String userBirth) {
 
         this.userID = userID;
         this.userPassword = userPassword;
         this.userName = userName;
-        this.userAge = userAge;
+        this.userBirth = userBirth;
     }
     public User(String userName){
         this.userName = userName;

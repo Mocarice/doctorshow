@@ -74,7 +74,6 @@ public class ReservationActivity extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    // String hospitalName = String.valueOf(parent.getItemAtPosition(position))
                     setHospitalID(hospitalList.get(position).hospitalID);
                     new ReservationActivity.BackgroundTask().execute();
                 }

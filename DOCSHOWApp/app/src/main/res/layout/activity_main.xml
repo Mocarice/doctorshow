@@ -18,7 +18,7 @@
         android:textColor="#ffffff"
         android:textSize="20dp"
         android:text="병원 예약"
-        android:onClick="GoReser"/>
+       />
 
     <Button
         android:id="@+id/informationButton"

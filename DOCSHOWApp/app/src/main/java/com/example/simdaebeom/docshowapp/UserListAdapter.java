@@ -40,12 +40,12 @@ public class UserListAdapter extends BaseAdapter {
         TextView userID =(TextView) v.findViewById(R.id.userID);
         TextView userPassword =(TextView) v.findViewById(R.id.userPassword);
         TextView userName =(TextView) v.findViewById(R.id.userName);
-        TextView userAge =(TextView) v.findViewById(R.id.userAge);
+        TextView userBirth =(TextView) v.findViewById(R.id.userBirth);
 
         userID.setText(userList.get(position).getUserID());
         userPassword.setText(userList.get(position).getUserPassword());
         userName.setText(userList.get(position).getUserName());
-        userAge.setText(userList.get(position).getUserAge());
+        userBirth.setText(userList.get(position).getUserBirth());
 
         v.setTag(userList.get(position).getUserID());
         return v;

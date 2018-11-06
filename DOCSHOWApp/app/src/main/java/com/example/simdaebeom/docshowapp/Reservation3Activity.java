@@ -126,6 +126,9 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
             intent.putExtra("doctorName",doctorName);
             intent.putExtra("hospitalID",hospitalID);
             intent.putExtra("userID", userID);
+            intent.putExtra("year", textYear.getText().toString());
+            intent.putExtra("month", textMon.getText().toString());
+            intent.putExtra("day", mItems.get(position));
 
             startActivity(intent);
         }

@@ -36,12 +36,14 @@
         <activity
             android:name=".MedicalInfoActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".ManagementActivity" />
         <activity
             android:name=".Reservation4Activity"
             android:parentActivityName=".Reservation3Activity" />
-        <activity android:name=".PayActivity"
-            android:parentActivityName=".Reservation4Activity"></activity>
+        <activity
+            android:name=".PayActivity"
+            android:parentActivityName=".Reservation4Activity" />
+        <activity android:name=".Pay2Activity"></activity>
+        <activity android:name="Pay2Activity" />
     </application>
 
 </manifest>

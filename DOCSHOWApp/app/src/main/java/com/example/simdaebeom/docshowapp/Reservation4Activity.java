@@ -22,6 +22,9 @@ public class Reservation4Activity extends AppCompatActivity {
     private String hospitalID;
     private String date;
     private String userID;
+    private String year;
+    private String month;
+    private String day;
 
 
     @Override
@@ -34,11 +37,16 @@ public class Reservation4Activity extends AppCompatActivity {
         doctorName = getintent.getExtras().getString("doctorName");
         hospitalID = getintent.getExtras().getString("hospitalID");
         date = getintent.getExtras().getString("date");
-        userID =getintent.getExtras().getString("userID");
-//         ArrayList<String> items = new ArrayList<String>() ;
-//         timeset(items);
-//
-//         ListAdapter adapter = new TimeAdapter(this,items);
+        userID = getintent.getExtras().getString("userID");
+        year = getintent.getExtras().getString("year");
+        month = getintent.getExtras().getString("month");
+        day = getintent.getExtras().getString("day");
+        if(Integer.parseInt(getintent.getExtras().getString("day"))<10) {
+            day = "0"+ getintent.getExtras().getString("day");
+        }
+
+
+
 
         ListView listView = (ListView)findViewById(R.id.timeList);
         final ArrayList<String> timeList = new ArrayList<String>();
@@ -49,7 +57,7 @@ public class Reservation4Activity extends AppCompatActivity {
         TextView dateTextview = (TextView)findViewById(R.id.date);
 
         doctorNameTextview.setText(getintent.getExtras().getString("doctorName")+" 선생님");
-        dateTextview.setText(getintent.getExtras().getString("date"));
+        dateTextview.setText(year+"-"+month+"-"+day);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -59,9 +67,11 @@ public class Reservation4Activity extends AppCompatActivity {
                 intent.putExtra("doctorID", doctorID);
                 intent.putExtra("doctorName",doctorName);
                 intent.putExtra("hospitalID",hospitalID);
-                intent.putExtra("date",date+timeList.get(position));
+                intent.putExtra("time",timeList.get(position));
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                intent.putExtra("day",day);
                 intent.putExtra("userID", userID);
-
                 Reservation4Activity.this.startActivity(intent);
             }
         });
@@ -71,12 +81,12 @@ public class Reservation4Activity extends AppCompatActivity {
     }
 
     public void timeset(ArrayList<String> timeList){
-        timeList.add(" 09:00");
-        timeList.add(" 10:00");
-        timeList.add(" 11:00");
-        timeList.add(" 13:00");
-        timeList.add(" 14:00");
-        timeList.add(" 15:00");
+        timeList.add("09:00");
+        timeList.add("10:00");
+        timeList.add("11:00");
+        timeList.add("13:00");
+        timeList.add("14:00");
+        timeList.add("15:00");
 ;
 
     }

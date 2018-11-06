@@ -7,32 +7,34 @@
     android:orientation="vertical"
     tools:context=".PayActivity">
 
-    <TextView
-        android:layout_marginTop="40dp"
+        <TextView
+            android:layout_marginTop="40dp"
 
-        android:id="@+id/doctorName"
-        android:textSize="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/date"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:textSize="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:gravity="center"
-        android:id="@+id/payButton"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:background="#000000"
-        android:textColor="#ffffff"
-        android:textSize="35dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="예약금 결제로 이동"/>
+            android:id="@+id/doctorName"
+            android:textSize="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/date"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:textSize="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/payButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginTop="40dp"
+            android:background="#000000"
+            android:gravity="center"
+            android:text="예약 하기"
+            android:textColor="#ffffff"
+            android:textSize="27dp" />
+
 
 </LinearLayout>
