@@ -43,7 +43,6 @@
             android:name=".PayActivity"
             android:parentActivityName=".Reservation4Activity" />
         <activity android:name=".Pay2Activity"></activity>
-        <activity android:name="Pay2Activity" />
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.example.simdaebeom.docshowapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,14 +53,19 @@ public class LoginActivity extends AppCompatActivity {
                                 String userPassword =jsonResponse.getString("userPassword");
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                 intent.putExtra("userID",userID);
-                                intent.putExtra("userPassword",userPassword);
                                 LoginActivity.this.startActivity(intent);
 
                             }
                             else{
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 builder.setMessage("로그인에 실패하였습니다.").setNegativeButton("다시 시도",null)
-                                        .create().show();
+                                        ;
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                                Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                                negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                                negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+
                             }
                         }catch (Exception e)
                         {

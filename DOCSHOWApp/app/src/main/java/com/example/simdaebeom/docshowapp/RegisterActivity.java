@@ -1,6 +1,7 @@
 package com.example.simdaebeom.docshowapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,13 +54,22 @@ public class  RegisterActivity extends AppCompatActivity {
                            boolean success = jsonResponse.getBoolean("success");
                            if(success) {
                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                               builder.setMessage("회원 등록이 성공 했습니다.").setPositiveButton("확인",null).create().show();
+                               builder.setMessage("회원 등록이 성공 했습니다.").setPositiveButton("확인",null);
+                               AlertDialog dialog = builder.create();
+                               dialog.show();
+                               Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                               positiveButton.setTextColor(Color.parseColor("#FFFFFF"));
+                               positiveButton.setBackgroundColor(Color.parseColor("#000000"));
                                finish();
 
                            }
                            else{
                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                               builder.setMessage("회원 등록이 실패 했습니다.").setNegativeButton("다시 시도",null).create().show();
+                               builder.setMessage("회원 등록이 실패 했습니다.").setNegativeButton("다시 시도",null);
+                               AlertDialog dialog = builder.create();
+                               dialog.show();
+                               Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                               negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
 
                            }
                        }
@@ -71,6 +81,7 @@ public class  RegisterActivity extends AppCompatActivity {
                    }
 
                };
+
                RegisterRequest registerRequest = new RegisterRequest(userID,userPassword,userName,userBirth,responseListener);
                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                queue.add(registerRequest);

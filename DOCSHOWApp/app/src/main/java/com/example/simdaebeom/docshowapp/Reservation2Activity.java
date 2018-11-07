@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -44,10 +45,12 @@ public class Reservation2Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         userID =intent.getExtras().getString("userID");
+
         listView = (ListView) findViewById(R.id.doctorList);
 
         saveList = new ArrayList<Doctor>();
         doctorList = new ArrayList<Doctor>();
+
 
 
         try{
@@ -137,7 +140,16 @@ public class Reservation2Activity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
 }

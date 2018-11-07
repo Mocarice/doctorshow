@@ -8,29 +8,31 @@
     android:orientation="vertical">
 
 
-
     <android.support.v7.widget.Toolbar
 
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        >
+        android:layout_centerHorizontal="true">
+
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            >
+            android:layout_gravity="center">
+
             <TextView
                 android:id="@+id/txv_toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="병원 예약"
-                android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+
         </FrameLayout>
+
 
 
     </android.support.v7.widget.Toolbar>
@@ -59,8 +61,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
-        android:dividerHeight="10dp"
-        android:divider="#000000"/>
+        android:dividerHeight="3dp"
+        android:divider="#dcdcdc"/>
 
 
 </LinearLayout>

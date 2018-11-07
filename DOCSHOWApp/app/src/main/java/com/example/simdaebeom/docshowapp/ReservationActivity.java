@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,7 +46,6 @@ public class ReservationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         userID =intent.getExtras().getString("userID");
-
         listView = (ListView) findViewById(R.id.hospitalList);
         hospitalList = new ArrayList<Hospital>();
         saveList = new ArrayList<Hospital>();
@@ -146,7 +146,6 @@ public class ReservationActivity extends AppCompatActivity {
         @Override
         public void onPostExecute(String result) {
             Intent intent = new Intent(ReservationActivity.this, Reservation2Activity.class);
-
             intent.putExtra("hospitalList", result);
             intent.putExtra("hospitalID", getHospitalID());
             intent.putExtra("userID", userID);
@@ -173,6 +172,16 @@ public class ReservationActivity extends AppCompatActivity {
 
     public String getHospitalID() {
         return hospitalID;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

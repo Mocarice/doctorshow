@@ -6,7 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:layout_marginTop="80dp">
+    android:layout_marginTop="40dp"
+   >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/hospital"
+        />
 
     <Button
         android:id="@+id/reservationButton"
@@ -17,7 +26,7 @@
         android:background="#000000"
         android:textColor="#ffffff"
         android:textSize="20dp"
-        android:text="병원 예약"
+        android:text="병원 예약 하기"
        />
 
     <Button
@@ -32,6 +41,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         />
+
 
 
 

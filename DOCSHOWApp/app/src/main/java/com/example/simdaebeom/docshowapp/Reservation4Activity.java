@@ -3,6 +3,8 @@ package com.example.simdaebeom.docshowapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,6 +35,12 @@ public class Reservation4Activity extends AppCompatActivity {
         setContentView(R.layout.activity_reser4);
         Intent getintent = getIntent();
 
+        ///toolbar 구현
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         doctorID = getintent.getExtras().getString("doctorID");
         doctorName = getintent.getExtras().getString("doctorName");
         hospitalID = getintent.getExtras().getString("hospitalID");
@@ -41,6 +49,7 @@ public class Reservation4Activity extends AppCompatActivity {
         year = getintent.getExtras().getString("year");
         month = getintent.getExtras().getString("month");
         day = getintent.getExtras().getString("day");
+
         if(Integer.parseInt(getintent.getExtras().getString("day"))<10) {
             day = "0"+ getintent.getExtras().getString("day");
         }
@@ -72,6 +81,7 @@ public class Reservation4Activity extends AppCompatActivity {
                 intent.putExtra("month",month);
                 intent.putExtra("day",day);
                 intent.putExtra("userID", userID);
+
                 Reservation4Activity.this.startActivity(intent);
             }
         });
@@ -89,5 +99,15 @@ public class Reservation4Activity extends AppCompatActivity {
         timeList.add("15:00");
 ;
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
