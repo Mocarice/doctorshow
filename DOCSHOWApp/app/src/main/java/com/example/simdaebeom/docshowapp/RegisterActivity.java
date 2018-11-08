@@ -6,6 +6,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,10 +42,40 @@ public class  RegisterActivity extends AppCompatActivity {
         //각각 변수에 값이 담겨진다.
        final EditText idText = (EditText) findViewById(R.id.idText);
        final EditText passwordText = (EditText) findViewById(R.id.passwordText);
+       final EditText confirm = (EditText) findViewById(R.id.confirm);
        final EditText nameText = (EditText) findViewById(R.id.nameText);
-       final EditText ageText = (EditText) findViewById(R.id.ageText);
-
+       final EditText birthText = (EditText) findViewById(R.id.birthText);
        final Button validateButton = (Button)findViewById(R.id.validateButton);
+
+        confirm.addTextChangedListener(new TextWatcher() {
+           @Override
+           public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+           }
+
+           @Override
+           public void onTextChanged(CharSequence s, int start, int before, int count) {
+               if((passwordText.getText().toString()).equals(confirm.getText().toString())){
+
+
+               }else{
+                   confirm.setError("비밀번호가 다릅니다.");
+
+               }
+           }
+
+           @Override
+           public void afterTextChanged(Editable s) {
+//               if((passwordText.getText().toString()).equals(confirm.getText().toString())){
+//                   confirm.setError("비밀번호가 같습니다.");
+//               }else{
+//                   confirm.setError("비밀번호가 다릅니다.");
+//
+//               }
+
+           }
+       });
+
+
        validateButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -118,15 +150,11 @@ public class  RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+
                String userID = idText.getText().toString();
-               SecurityUtil securityUtil = new SecurityUtil();
-//               String newPassword = securityUtil.encryptSHA256("1");
                String userPassword = passwordText.getText().toString();
-               userPassword = securityUtil.encryptSHA256(userPassword);
+               String passwordconfirm = confirm.getText().toString();
                String userName = nameText.getText().toString();
-               int userBirth = Integer.parseInt(ageText.getText().toString());
-
-
 
                 if(!validate) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
@@ -142,16 +170,35 @@ public class  RegisterActivity extends AppCompatActivity {
                 }
 
 
-               if(userID.equals("")||userPassword.equals("")||userName.equals("")||ageText.getText().toString().equals("")) {
+
+               if(userPassword.equals("")||passwordconfirm.equals("")||userName.equals("")) {
                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                    dialog = builder.setMessage("빈칸 없이 입력해주세요.")
                            .setNegativeButton("확인", null)
                            .create();
                    dialog.show();
+                   Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                   negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                   negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+                   return;
+               }
+               if(!passwordconfirm.equals(userPassword)){
+                   AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                   dialog = builder.setMessage("비밀번호와 비밀번호 확인은 같아야 합니다.")
+                           .setNegativeButton("확인", null)
+                           .create();
+                   dialog.show();
+                   Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                   negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                   negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+
                    return;
                }
 
-
+               SecurityUtil securityUtil = new SecurityUtil();
+               userPassword = securityUtil.encryptSHA256(userPassword);
+               passwordconfirm = securityUtil.encryptSHA256(passwordconfirm);
+               int userBirth =Integer.parseInt(birthText.getText().toString());
 
 
                Response.Listener<String> responseListener = new Response.Listener<String>() {

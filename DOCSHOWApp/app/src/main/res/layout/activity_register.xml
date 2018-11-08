@@ -65,6 +65,15 @@
         android:inputType="textPassword" />
 
     <EditText
+        android:id="@+id/confirm"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="비밀번호 확인"
+        android:inputType="textPassword" />
+
+    <EditText
         android:id="@+id/nameText"
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -74,7 +83,7 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/ageText"
+        android:id="@+id/birthText"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
@@ -87,7 +96,7 @@
         android:layout_width="300dp"
         android:layout_gravity="center"
         android:layout_height="50dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="30dp"
         android:text="회원가입"
         android:textSize="20dp"
         android:background="#000000"
