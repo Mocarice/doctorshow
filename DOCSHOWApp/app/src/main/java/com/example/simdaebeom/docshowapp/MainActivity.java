@@ -18,18 +18,16 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     private String userID;
+    private String userPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-
         Intent intent = getIntent();
        userID =intent.getExtras().getString("userID");
-//        TextView idText = (TextView) findViewById(R.id.idText);
-//        String userID = intent.getStringExtra("userID");
-
+        userPassword = intent.getExtras().getString("userPassword");
         final Button reservationButton = (Button)findViewById(R.id.reservationButton);
         reservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent qrIntent = new Intent(MainActivity.this,QRActivity.class);
-                qrIntent.putExtra("userID", userID);
+                qrIntent.putExtra("userPassword", userPassword);
                 MainActivity.this.startActivity(qrIntent);
             }
         });

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -118,7 +119,10 @@ public class  RegisterActivity extends AppCompatActivity {
            @Override
            public void onClick(View view) {
                String userID = idText.getText().toString();
+               SecurityUtil securityUtil = new SecurityUtil();
+//               String newPassword = securityUtil.encryptSHA256("1");
                String userPassword = passwordText.getText().toString();
+               userPassword = securityUtil.encryptSHA256(userPassword);
                String userName = nameText.getText().toString();
                int userBirth = Integer.parseInt(ageText.getText().toString());
 

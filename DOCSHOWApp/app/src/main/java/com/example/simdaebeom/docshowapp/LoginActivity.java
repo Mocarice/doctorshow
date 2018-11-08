@@ -39,10 +39,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final String userID = idText.getText().toString();
-                final String userPassword = passwordText.getText().toString();
-
+                String userPassword = passwordText.getText().toString();
+                SecurityUtil securityUtil = new SecurityUtil();
+                userPassword= securityUtil.encryptSHA256(userPassword);
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
-
                     @Override
                     public void onResponse(String response) {
                         try{
@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String userPassword =jsonResponse.getString("userPassword");
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                 intent.putExtra("userID",userID);
+                                intent.putExtra("userPassword",userPassword);
                                 LoginActivity.this.startActivity(intent);
 
                             }

@@ -32,36 +32,11 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <EditText
-        android:layout_marginTop="100dp"
-        android:id="@+id/edt_value"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="qr코드화 할 텍스트를 쓰시오." />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/start"
-            android:layout_width="match_parent"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_height="wrap_content"
-            android:background="#000000"
-            android:textColor="#ffffff"
-            android:text="QR 코드 생성" />
-
-
-    </LinearLayout>
 
     <ImageView
         android:id="@+id/QR_Image"
+        android:layout_marginTop="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name" />
