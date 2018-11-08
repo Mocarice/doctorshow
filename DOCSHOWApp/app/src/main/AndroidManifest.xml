@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.simdaebeom.docshowapp">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -42,7 +43,9 @@
         <activity
             android:name=".PayActivity"
             android:parentActivityName=".Reservation4Activity" />
-        <activity android:name=".Pay2Activity"></activity>
+        <activity android:name=".Pay2Activity" />
+        <activity android:name=".QRActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

@@ -16,8 +16,14 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-///회원등록관련 서버///
+
+
 public class  RegisterActivity extends AppCompatActivity {
+
+    private AlertDialog dialog;
+    private boolean validate =false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +42,113 @@ public class  RegisterActivity extends AppCompatActivity {
        final EditText nameText = (EditText) findViewById(R.id.nameText);
        final EditText ageText = (EditText) findViewById(R.id.ageText);
 
+       final Button validateButton = (Button)findViewById(R.id.validateButton);
+       validateButton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               String userID = idText.getText().toString();
+               if(validate){
+                   return;
+               }
+               if(userID.equals("")){
+                   AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                   dialog = builder.setMessage("아이디는 빈 칸일 수 없습니다.")
+                           .setPositiveButton("확인",null)
+                           .create();
+                   dialog.show();
+                   Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                   positiveButton.setTextColor(Color.parseColor("#FFFFFF"));
+                   positiveButton.setBackgroundColor(Color.parseColor("#000000"));
+                   return;
+
+               }
+               Response.Listener<String> responseLister = new Response.Listener<String>() {
+                   @Override
+                   public void onResponse(String response) {
+                       try{
+
+                       JSONObject jsonResponse = new JSONObject(response);
+                       boolean success = jsonResponse.getBoolean("success");
+                            if(success){
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                dialog = builder.setMessage("사용 할 수 있는 아이디 입니다.")
+                                        .setPositiveButton("확인",null)
+                                        .create();
+                                dialog.show();
+                                idText.setEnabled(false);
+                                validate = true;
+                                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                                positiveButton.setTextColor(Color.parseColor("#FFFFFF"));
+                                positiveButton.setBackgroundColor(Color.parseColor("#000000"));
+
+                                idText.setBackgroundColor(Color.parseColor("#c0c0c0"));
+                                validateButton.setBackgroundColor(Color.parseColor("#c0c0c0"));
+
+
+                            }
+                            else{
+                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                dialog = builder.setMessage("사용 할 수 없는 아이디 입니다.")
+                                        .setNegativeButton("확인",null)
+                                        .create();
+                                dialog.show();
+                                Button NegativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                                NegativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                                NegativeButton.setBackgroundColor(Color.parseColor("#000000"));
+
+
+                            }
+                       }
+                       catch (Exception e)
+                       {
+                          e.printStackTrace();
+                       }
+                   }
+               };
+               ValidateRequest validateRequest = new ValidateRequest(userID,responseLister);
+               RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+               queue.add(validateRequest);
+
+           }
+       });
 
         Button registerButton = (Button)findViewById(R.id.registerButton);
-       registerButton.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                String userID = idText.getText().toString();
                String userPassword = passwordText.getText().toString();
                String userName = nameText.getText().toString();
                int userBirth = Integer.parseInt(ageText.getText().toString());
+
+
+
+                if(!validate) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    dialog = builder.setMessage("먼저 중복 체크를 해주세요.")
+                            .setNegativeButton("확인",null)
+                            .create();
+                    dialog.show();
+                    Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                    negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                    negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+                    return;
+
+                }
+
+
+               if(userID.equals("")||userPassword.equals("")||userName.equals("")||ageText.getText().toString().equals("")) {
+                   AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                   dialog = builder.setMessage("빈칸 없이 입력해주세요.")
+                           .setNegativeButton("확인", null)
+                           .create();
+                   dialog.show();
+                   return;
+               }
+
+
+
 
                Response.Listener<String> responseListener = new Response.Listener<String>() {
                    @Override
@@ -89,6 +193,14 @@ public class  RegisterActivity extends AppCompatActivity {
 
            }
        });
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if(dialog !=null){
+            dialog.dismiss();
+            dialog = null;
+        }
     }
     @Override
     public void onBackPressed() {

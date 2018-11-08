@@ -70,16 +70,7 @@ public class PayActivity extends AppCompatActivity {
         doctorNameTextView.setText(doctorName+" 선생님");
         dateTextView.setText(date+" "+time);
 
-        Button homeButton = (Button)findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PayActivity.this, MainActivity.class);
 
-                intent.putExtra("userID", userID);
-                PayActivity.this.startActivity(intent);
-            }
-        });
         Button payButton = (Button)findViewById(R.id.payButton);
         payButton.setOnClickListener(new View.OnClickListener(){
             @Override

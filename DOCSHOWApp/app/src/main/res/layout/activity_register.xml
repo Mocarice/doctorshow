@@ -32,18 +32,32 @@
     </android.support.v7.widget.Toolbar>
 
 
-    <EditText
-        android:id="@+id/idText"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:ems="10"
-        android:hint="아이디"
-        android:inputType="textPersonName" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+        <EditText
+            android:id="@+id/idText"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="아이디"
+            android:inputType="textPersonName" />
+       <Button
+           android:id="@+id/validateButton"
+           android:layout_marginLeft="10dp"
+           android:layout_marginRight="10dp"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:text="중복 확인"
+           android:textColor="#ffffff"
+           android:background="#000000"/>
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/passwordText"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:ems="10"
@@ -52,7 +66,7 @@
 
     <EditText
         android:id="@+id/nameText"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:ems="10"
@@ -61,7 +75,7 @@
 
     <EditText
         android:id="@+id/ageText"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:ems="6"
@@ -70,7 +84,8 @@
 
     <Button
         android:id="@+id/registerButton"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
+        android:layout_gravity="center"
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
         android:text="회원가입"

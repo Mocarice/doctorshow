@@ -37,18 +37,15 @@ public class MainActivity extends AppCompatActivity {
                 new BackgroundTask().execute();
             }
         });
-
-//        if (!userID.equals("admin")) {
-//            managementButton.setVisibility(View.GONE);//button 비활성화
-//        }
-//        managementButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                new BackgroundTask().execute();
-//
-//            }
-//        });
-
+        Button qrButton = (Button)findViewById(R.id.qrButton);
+        qrButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent qrIntent = new Intent(MainActivity.this,QRActivity.class);
+                qrIntent.putExtra("userID", userID);
+                MainActivity.this.startActivity(qrIntent);
+            }
+        });
     }
 
     class BackgroundTask extends AsyncTask<Void, Void, String> {
