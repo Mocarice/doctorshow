@@ -120,6 +120,14 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
         if (mItems.get(position).equals("")) {
             ;
         }else {
+            String inDate   = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
+           int clickdate = Integer.parseInt(inDate);
+            String year=textYear.getText().toString();
+            String month=textMon.getText().toString();
+            String day=mItems.get(position);
+            int currentDate=
+                    Integer.parseInt(year+month+day);
+            if(clickdate<currentDate){
             Intent intent = new Intent(this, Reservation4Activity.class);//해당 일을 눌렸을때
             intent.putExtra("date", textYear.getText().toString() + "-"
                    + textMon.getText().toString() + "-" + mItems.get(position));
@@ -127,11 +135,12 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
             intent.putExtra("doctorName",doctorName);
             intent.putExtra("hospitalID",hospitalID);
             intent.putExtra("userID", userID);
-            intent.putExtra("year", textYear.getText().toString());
-            intent.putExtra("month", textMon.getText().toString());
-            intent.putExtra("day", mItems.get(position));
+            intent.putExtra("year", year);
+            intent.putExtra("month", month);
+            intent.putExtra("day", day);
 
             startActivity(intent);
+            }
         }
 
 
