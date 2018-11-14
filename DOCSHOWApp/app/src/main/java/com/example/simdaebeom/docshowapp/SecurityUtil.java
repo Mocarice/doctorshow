@@ -29,9 +29,9 @@ public class SecurityUtil {
 
     /**
      * byte[] ret = HashUtil.digest("MD5", "abcd".getBytes());
-     *  ó�� ȣ��
+     *
      */
-    public String encryptMD5(String str){ //���� �������� �߰ߵǾ� ���� ������� �ʴ� ����̴�.
+    public String encryptMD5(String str){
 
         String md5 = "";
         try{

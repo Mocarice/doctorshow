@@ -7,64 +7,56 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingTop="5dp"
-    android:layout_marginTop="20dp"
     android:paddingBottom="5dp"
     android:background="#ffffff">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
-        android:layout_marginTop="10dp">
-        <TextView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/doctorName"
-            android:text="이름"
-            android:textSize="20dp"
-            android:textColor="#000000"/>
+
         <TextView
             android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/reservationNumber"
+            android:text="에약번호"
+            android:textColor="#000000"
+            android:visibility="gone"/>
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/doctorID"
-            android:text="의사면허번호"
-            android:textSize="0dp"
-            android:visibility="gone"
-            android:textColor="#000000"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/hospitalID"
-            android:text="병원사업자번호"
-            android:textSize="0dp"
-            android:visibility="gone"
-            android:textColor="#000000"/>
-        <TextView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/department"
-            android:text="과"
+            android:text="의사"
             android:textSize="20dp"
             android:textColor="#000000"/>
         <TextView
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/telephone"
-            android:text="번호"
+            android:id="@+id/userID"
+            android:text="사용자"
             android:textSize="20dp"
             android:textColor="#000000"/>
         <TextView
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/dayOfWork"
-            android:text="업무정보"
+            android:id="@+id/date"
+            android:text="날짜"
             android:textSize="20dp"
             android:textColor="#000000"/>
-
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/time"
+            android:text="시간"
+            android:textSize="20dp"
+            android:textColor="#000000"/>
 
 
     </LinearLayout>

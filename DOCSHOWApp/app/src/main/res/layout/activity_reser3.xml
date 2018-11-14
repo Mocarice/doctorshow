@@ -19,21 +19,41 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             >
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
-                <TextView
-                    android:id="@+id/txv_toolbar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="예약 날짜 선택"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="80dp">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/txv_toolbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="예약 날짜 선택"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
 
-                    />
-            </FrameLayout>
+                        />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/workDay"
+                android:layout_marginLeft="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="요일"
+                android:textStyle="bold"
+                android:textSize="20dp"
+
+                />
         </android.support.v7.widget.Toolbar>
     </LinearLayout>
     <LinearLayout
@@ -88,8 +108,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:numColumns="7" >
-            </GridView>
+                android:numColumns="7"></GridView>
         </LinearLayout>
 
 

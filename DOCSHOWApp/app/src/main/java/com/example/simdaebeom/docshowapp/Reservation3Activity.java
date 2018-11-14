@@ -1,11 +1,14 @@
 package com.example.simdaebeom.docshowapp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,15 +22,19 @@ import java.util.Date;
 public class Reservation3Activity extends AppCompatActivity implements View.OnClickListener,
         AdapterView.OnItemClickListener{
 
-    
+    private AlertDialog dialog;
     ArrayList<String> mItems;
-    ArrayAdapter<String> adapter;
+    private ArrayAdapter<String> adapter;
     TextView textYear;
     TextView textMon;
     private String doctorID;
     private String doctorName;
     private String hospitalID;
     private String userID;
+    private String dayOfWork;
+    private GridView gird;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +51,68 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
         doctorID = getintent.getExtras().getString("doctorID");
         doctorName = getintent.getExtras().getString("doctorName");
         userID =getintent.getExtras().getString("userID");
+        dayOfWork =getintent.getExtras().getString("dayOfWork");
 
 
+
+
+        TextView workDay = (TextView)findViewById(R.id.workDay);
+        if(dayOfWork.equals("1")){
+            workDay.setText("(월,수,금)");
+        }
+        else if(dayOfWork.equals("2")){
+            workDay.setText("(화,목,토)");
+        }
+        else
+        {
+            workDay.setText("근무하지않음.");
+        }
         textYear = (TextView) this.findViewById(R.id.edit1);
         textMon = (TextView) this.findViewById(R.id.edit2);
 
         mItems = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, mItems);
+                android.R.layout.simple_list_item_1, mItems){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent){
+                // Get the current item from ListView
+                View view = super.getView(position,convertView,parent);
+                int clickdate = Integer.parseInt( new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date()));
+                String year=textYear.getText().toString();
+                String month=textMon.getText().toString();
+//                if(position==1||position==3||position==5)
+//                    view.setBackgroundColor(Color.parseColor("#54d482"));
+                if(position>7)
+                {
+                    String day=mItems.get(position);
+                    int currentDate= Integer.parseInt(year+month+day);
+                    if(clickdate<currentDate){
+                        if(dayOfWork.equals("1")&&!mItems.get(position).equals("")){
+                            if(position%7==1||position%7==3||position%7==5){
+                                view.setBackgroundColor(Color.parseColor("#54d482"));
+                            }
+                        }
+                        else if(dayOfWork.equals("2")&&!mItems.get(position).equals("")){
+                            if(position%7==2||position%7==4||position%7==6){
+                                view.setBackgroundColor(Color.parseColor("#54d482"));
+                            }
+                        }
+                    }
+                }
 
-        GridView gird = (GridView) this.findViewById(R.id.grid1);
+
+
+                return view;
+            }
+
+        };
+
+        gird = (GridView) this.findViewById(R.id.grid1);
         gird.setAdapter(adapter);
+
+
         gird.setOnItemClickListener(this);
+
 
         Date date = new Date();// 오늘에 날짜를 세팅 해준다.
         int year = date.getYear() + 1900;
@@ -63,10 +120,20 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
         textYear.setText(year + "");
         textMon.setText(mon + "");
 
+
+
+
+
         fillDate(year, mon);
 
         Button btnmove = (Button) this.findViewById(R.id.bt1);
         btnmove.setOnClickListener(this);
+
+
+
+
+
+
 
 
     }
@@ -86,6 +153,7 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
         mItems.add("금");
         mItems.add("토");
 
+
         Date current = new Date(year - 1900, mon - 1, 1);
         int day = current.getDay(); // 요일도 int로 저장.
 
@@ -99,6 +167,8 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
         for (int i = 1; i <= last; i++) {
             mItems.add(i + "");
         }
+
+
         adapter.notifyDataSetChanged();
     }
 
@@ -115,36 +185,102 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
 
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (mItems.get(position).equals("")) {
             ;
         }else {
-            String inDate   = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
-           int clickdate = Integer.parseInt(inDate);
+            int clickdate = Integer.parseInt( new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date()));
             String year=textYear.getText().toString();
             String month=textMon.getText().toString();
             String day=mItems.get(position);
             int currentDate=
                     Integer.parseInt(year+month+day);
             if(clickdate<currentDate){
-            Intent intent = new Intent(this, Reservation4Activity.class);//해당 일을 눌렸을때
-            intent.putExtra("date", textYear.getText().toString() + "-"
-                   + textMon.getText().toString() + "-" + mItems.get(position));
-            intent.putExtra("doctorID", doctorID);
-            intent.putExtra("doctorName",doctorName);
-            intent.putExtra("hospitalID",hospitalID);
-            intent.putExtra("userID", userID);
-            intent.putExtra("year", year);
-            intent.putExtra("month", month);
-            intent.putExtra("day", day);
 
-            startActivity(intent);
+                if(dayOfWork.equals("1")){
+
+                    if(position%7==1||position%7==3||position%7==5)
+                    {
+                        Intent intent = new Intent(this, Reservation4Activity.class);//해당 일을 눌렸을때
+                        intent.putExtra("date", textYear.getText().toString() + "-"
+                                + textMon.getText().toString() + "-" + mItems.get(position));
+                        intent.putExtra("doctorID", doctorID);
+                        intent.putExtra("doctorName",doctorName);
+                        intent.putExtra("hospitalID",hospitalID);
+                        intent.putExtra("userID", userID);
+                        intent.putExtra("year", year);
+                        intent.putExtra("month", month);
+                        intent.putExtra("day", day);
+                        startActivity(intent);
+                    }
+                    else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Reservation3Activity.this);
+                        dialog = builder.setMessage("해당 요일은 선생님의 근무요일이 아닙니다.")
+                                .setNegativeButton("확인", null)
+                                .create();
+                        dialog.show();
+                        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                        negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                        negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+                    }
+                }else if(dayOfWork.equals("2")){
+
+                    if(position%7==2||position%7==4||position%7==6)
+                    {
+                        Intent intent = new Intent(this, Reservation4Activity.class);//해당 일을 눌렸을때
+                        intent.putExtra("date", textYear.getText().toString() + "-"
+                                + textMon.getText().toString() + "-" + mItems.get(position));
+                        intent.putExtra("doctorID", doctorID);
+                        intent.putExtra("doctorName",doctorName);
+                        intent.putExtra("hospitalID",hospitalID);
+                        intent.putExtra("userID", userID);
+                        intent.putExtra("year", year);
+                        intent.putExtra("month", month);
+                        intent.putExtra("day", day);
+
+                        startActivity(intent);
+                    }
+                    else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Reservation3Activity.this);
+                        dialog = builder.setMessage("해당 요일은 선생님의 근무요일이 아닙니다.")
+                                .setNegativeButton("확인", null)
+                                .create();
+                        dialog.show();
+                        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                        negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                        negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+                    }
+
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Reservation3Activity.this);
+                    dialog = builder.setMessage("해당 요일은 예약할 수 없습니다.")
+                            .setNegativeButton("확인", null)
+                            .create();
+                    dialog.show();
+                    Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                    negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                    negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+                }
+
+            }
+            else{
+                AlertDialog.Builder builder = new AlertDialog.Builder(Reservation3Activity.this);
+                dialog = builder.setMessage("해당 날짜는 예약할 수 없습니다.")
+                        .setNegativeButton("확인", null)
+                        .create();
+                dialog.show();
+                Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+
             }
         }
 
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -155,4 +291,5 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

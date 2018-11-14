@@ -6,13 +6,17 @@ public class Doctor {
     String hospitalID;
     String department;
     String telephone;
+    String dayOfWork;
 
-    public Doctor(String doctorID, String doctorName, String hospitalID, String department, String telephone) {
+
+
+    public Doctor(String doctorID, String doctorName, String hospitalID, String department, String telephone, String dayOfWork) {
         this.doctorID = doctorID;
         this.doctorName = doctorName;
         this.hospitalID = hospitalID;
         this.department = department;
         this.telephone = telephone;
+        this.dayOfWork = dayOfWork;
     }
 
     public String getDoctorID() {
@@ -53,6 +57,13 @@ public class Doctor {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+    public String getDayOfWork() {
+        return dayOfWork;
+    }
+
+    public void setDayOfWork(String dayOfWork) {
+        this.dayOfWork = dayOfWork;
     }
 }
 

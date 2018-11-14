@@ -110,6 +110,7 @@ public class ReservationActivity extends AppCompatActivity {
     class BackgroundTask extends AsyncTask<Void, Void, String> {
         String target;
 
+
         @Override
         protected void onPreExecute() {
             target = "http://debum93.cafe24.com/Doctor.php";

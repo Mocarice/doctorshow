@@ -43,6 +43,7 @@ public class DoctorAdapter extends BaseAdapter {
         TextView hospitalID =(TextView) v.findViewById(R.id.hospitalID);
         TextView department =(TextView) v.findViewById(R.id.department);
         TextView telephone =(TextView) v.findViewById(R.id.telephone);
+        TextView dayOfWork = (TextView) v.findViewById(R.id.dayOfWork);
 
 
         doctorName.setText(doctorList.get(position).getDoctorName());

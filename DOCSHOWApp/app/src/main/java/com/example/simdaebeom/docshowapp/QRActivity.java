@@ -26,7 +26,6 @@ import androidmads.library.qrgenearator.QRGSaver;
 public class QRActivity extends AppCompatActivity {
 
     String TAG = "GenerateQRCode";
-    EditText edtValue;
     ImageView qrImage;
     Bitmap bitmap;
     QRGEncoder qrgEncoder;

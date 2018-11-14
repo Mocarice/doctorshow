@@ -57,7 +57,7 @@ public class Reservation2Activity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(intent.getStringExtra("hospitalList"));
             JSONArray jsonArray = jsonObject.getJSONArray("response");
             int count = 0;
-            String doctorID,doctorName,doctorHospitalID,department,telephone;
+            String doctorID,doctorName,doctorHospitalID,department,telephone,dayOfWork;
             while(count<jsonArray.length())
             {
                 String hospitalID = intent.getExtras().getString("hospitalID");
@@ -67,7 +67,8 @@ public class Reservation2Activity extends AppCompatActivity {
                 doctorHospitalID = object.getString("hospitalID");
                 department = object.getString("department");
                 telephone = object.getString("telephone");
-                Doctor doctor = new Doctor(doctorID,doctorName,doctorHospitalID,department,telephone);
+                dayOfWork = object.getString("dayOfWork");
+                Doctor doctor = new Doctor(doctorID,doctorName,doctorHospitalID,department,telephone,dayOfWork);
                 if(hospitalID.equals(doctorHospitalID)){
                     doctorList.add(doctor);
                     saveList.add(doctor);
@@ -88,6 +89,7 @@ public class Reservation2Activity extends AppCompatActivity {
                     intent.putExtra("doctorName",doctorList.get(position).doctorName);
                     intent.putExtra("hospitalID",doctorList.get(position).hospitalID);
                     intent.putExtra("userID",userID);
+                    intent.putExtra("dayOfWork",doctorList.get(position).dayOfWork);
 
 
                     Reservation2Activity.this.startActivity(intent);
@@ -125,7 +127,6 @@ public class Reservation2Activity extends AppCompatActivity {
 
     public void goCalendar(View view) {
         Intent Reservation3Intent = new Intent(Reservation2Activity.this,Reservation3Activity.class);
-//        intent.putExtra("hospitalList", result);
         Reservation3Intent.putExtra("userID", userID);
 
         Reservation2Activity.this.startActivity(Reservation3Intent);
