@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:background="#000000"
         android:textColor="#ffffff"
-        android:text="내 예약보기"
+        android:text="내 예약 보기"
         android:textSize="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="30dp"

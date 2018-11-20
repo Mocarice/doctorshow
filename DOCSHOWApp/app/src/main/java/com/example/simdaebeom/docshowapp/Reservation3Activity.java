@@ -77,30 +77,62 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
             public View getView(int position, View convertView, ViewGroup parent){
                 // Get the current item from ListView
                 View view = super.getView(position,convertView,parent);
-                int clickdate = Integer.parseInt( new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date()));
+                int currentDate = Integer.parseInt( new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date()));
+                String currentMonth = new java.text.SimpleDateFormat("yyyyMM").format(new java.util.Date());
+
+
                 String year=textYear.getText().toString();
                 String month=textMon.getText().toString();
-//                if(position==1||position==3||position==5)
-//                    view.setBackgroundColor(Color.parseColor("#54d482"));
-                if(position>7)
-                {
-                    String day=mItems.get(position);
-                    int currentDate= Integer.parseInt(year+month+day);
-                    if(clickdate<currentDate){
-                        if(dayOfWork.equals("1")&&!mItems.get(position).equals("")){
-                            if(position%7==1||position%7==3||position%7==5){
-                                view.setBackgroundColor(Color.parseColor("#54d482"));
+                String day=mItems.get(position);
+                if(mItems.get(position).equals("")||mItems.get(position).equals("월")||mItems.get(position).equals("화")||mItems.get(position).equals("수")||mItems.get(position).equals("목")||mItems.get(position).equals("금")||mItems.get(position).equals("토")||mItems.get(position).equals("일")){
+                    ;}
+                else{
+
+                        int ItemDate= Integer.parseInt(year+month+day);
+                        int currentMon = Integer.parseInt(currentMonth)*100;
+                        //해당 달에서 해당 날짜 이후에만 예약가능
+                        if(currentMonth.equals(year+month)&&currentMon+Integer.parseInt(mItems.get(position))>currentDate){
+                            if(dayOfWork.equals("1")){
+                                if(position%7==1||position%7==3||position%7==5){
+                                    view.setBackgroundColor(Color.parseColor("#54d482"));
+                                }
+                            }
+                            else if(dayOfWork.equals("2")){
+                                if(position%7==2||position%7==4||position%7==6){
+                                    view.setBackgroundColor(Color.parseColor("#54d482"));
+                                }
                             }
                         }
-                        else if(dayOfWork.equals("2")&&!mItems.get(position).equals("")){
-                            if(position%7==2||position%7==4||position%7==6){
-                                view.setBackgroundColor(Color.parseColor("#54d482"));
+                        //12월일 경우에는 다음해 1월까지 예약가능
+                        else if(Integer.parseInt(year)>Integer.parseInt(currentMonth)/100&&Integer.parseInt(month)==Integer.parseInt(currentMonth)%100-11&&currentDate%100>=Integer.parseInt(day)){
+                            if(dayOfWork.equals("1")){
+                                if(position%7==1||position%7==3||position%7==5){
+                                    view.setBackgroundColor(Color.parseColor("#54d482"));
+                                }
+                            }
+                            else if(dayOfWork.equals("2")){
+                                if(position%7==2||position%7==4||position%7==6){
+                                    view.setBackgroundColor(Color.parseColor("#54d482"));
+                                }
                             }
                         }
-                    }
+                        //현재 날짜에서 한달 이후의 날짜까지만 예약가
+                        else if(Integer.parseInt(year)==Integer.parseInt(currentMonth)/100&&Integer.parseInt(month)==Integer.parseInt(currentMonth)%100+1&&currentDate%100>=Integer.parseInt(day)){
+                            if(dayOfWork.equals("1")){
+                                if(position%7==1||position%7==3||position%7==5){
+                                    view.setBackgroundColor(Color.parseColor("#54d482"));
+                                }
+                            }
+                            else if(dayOfWork.equals("2")){
+                                if(position%7==2||position%7==4||position%7==6){
+                                    view.setBackgroundColor(Color.parseColor("#54d482"));
+                                }
+                            }
+                        }
+
+
+
                 }
-
-
 
                 return view;
             }
@@ -179,8 +211,7 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
             int year = Integer.parseInt(textYear.getText().toString());
             int mon = Integer.parseInt(textMon.getText().toString());
             fillDate(year, mon);
-
-
+            gird.setAdapter(adapter);
         }
 
     }
@@ -188,16 +219,19 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (mItems.get(position).equals("")) {
+        if (mItems.get(position).equals("")||mItems.get(position).equals("월")||mItems.get(position).equals("화")||mItems.get(position).equals("수")||mItems.get(position).equals("목")||mItems.get(position).equals("금")||mItems.get(position).equals("토")||mItems.get(position).equals("일")) {
             ;
         }else {
-            int clickdate = Integer.parseInt( new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date()));
+            int currentDate = Integer.parseInt( new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date()));
             String year=textYear.getText().toString();
             String month=textMon.getText().toString();
             String day=mItems.get(position);
-            int currentDate=
+            String currentMonth = new java.text.SimpleDateFormat("yyyyMM").format(new java.util.Date());
+
+            int currentMon = Integer.parseInt(currentMonth)*100;
+            int clickDate=
                     Integer.parseInt(year+month+day);
-            if(clickdate<currentDate){
+            if(currentMonth.equals(year+month)&&currentMon+Integer.parseInt(mItems.get(position))>currentDate){
 
                 if(dayOfWork.equals("1")){
 
@@ -264,6 +298,138 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
                     negativeButton.setBackgroundColor(Color.parseColor("#000000"));
                 }
 
+            }
+            else if(Integer.parseInt(year)>Integer.parseInt(currentMonth)/100&&Integer.parseInt(month)==Integer.parseInt(currentMonth)%100-11&&currentDate%100>=Integer.parseInt(day)){
+                if(dayOfWork.equals("1")){
+
+                    if(position%7==1||position%7==3||position%7==5)
+                    {
+                        Intent intent = new Intent(this, Reservation4Activity.class);//해당 일을 눌렸을때
+                        intent.putExtra("date", textYear.getText().toString() + "-"
+                                + textMon.getText().toString() + "-" + mItems.get(position));
+                        intent.putExtra("doctorID", doctorID);
+                        intent.putExtra("doctorName",doctorName);
+                        intent.putExtra("hospitalID",hospitalID);
+                        intent.putExtra("userID", userID);
+                        intent.putExtra("year", year);
+                        intent.putExtra("month", month);
+                        intent.putExtra("day", day);
+                        startActivity(intent);
+                    }
+                    else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Reservation3Activity.this);
+                        dialog = builder.setMessage("해당 요일은 선생님의 근무요일이 아닙니다.")
+                                .setNegativeButton("확인", null)
+                                .create();
+                        dialog.show();
+                        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                        negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                        negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+                    }
+                }else if(dayOfWork.equals("2")){
+
+                    if(position%7==2||position%7==4||position%7==6)
+                    {
+                        Intent intent = new Intent(this, Reservation4Activity.class);//해당 일을 눌렸을때
+                        intent.putExtra("date", textYear.getText().toString() + "-"
+                                + textMon.getText().toString() + "-" + mItems.get(position));
+                        intent.putExtra("doctorID", doctorID);
+                        intent.putExtra("doctorName",doctorName);
+                        intent.putExtra("hospitalID",hospitalID);
+                        intent.putExtra("userID", userID);
+                        intent.putExtra("year", year);
+                        intent.putExtra("month", month);
+                        intent.putExtra("day", day);
+
+                        startActivity(intent);
+                    }
+                    else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Reservation3Activity.this);
+                        dialog = builder.setMessage("해당 요일은 선생님의 근무요일이 아닙니다.")
+                                .setNegativeButton("확인", null)
+                                .create();
+                        dialog.show();
+                        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                        negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                        negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+                    }
+
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Reservation3Activity.this);
+                    dialog = builder.setMessage("해당 요일은 예약할 수 없습니다.")
+                            .setNegativeButton("확인", null)
+                            .create();
+                    dialog.show();
+                    Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                    negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                    negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+                }
+            }
+            else if(Integer.parseInt(year)==Integer.parseInt(currentMonth)/100&&Integer.parseInt(month)==Integer.parseInt(currentMonth)%100+1&&currentDate%100>=Integer.parseInt(day)){
+                if(dayOfWork.equals("1")){
+
+                    if(position%7==1||position%7==3||position%7==5)
+                    {
+                        Intent intent = new Intent(this, Reservation4Activity.class);//해당 일을 눌렸을때
+                        intent.putExtra("date", textYear.getText().toString() + "-"
+                                + textMon.getText().toString() + "-" + mItems.get(position));
+                        intent.putExtra("doctorID", doctorID);
+                        intent.putExtra("doctorName",doctorName);
+                        intent.putExtra("hospitalID",hospitalID);
+                        intent.putExtra("userID", userID);
+                        intent.putExtra("year", year);
+                        intent.putExtra("month", month);
+                        intent.putExtra("day", day);
+                        startActivity(intent);
+                    }
+                    else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Reservation3Activity.this);
+                        dialog = builder.setMessage("해당 요일은 선생님의 근무요일이 아닙니다.")
+                                .setNegativeButton("확인", null)
+                                .create();
+                        dialog.show();
+                        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                        negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                        negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+                    }
+                }else if(dayOfWork.equals("2")){
+
+                    if(position%7==2||position%7==4||position%7==6)
+                    {
+                        Intent intent = new Intent(this, Reservation4Activity.class);//해당 일을 눌렸을때
+                        intent.putExtra("date", textYear.getText().toString() + "-"
+                                + textMon.getText().toString() + "-" + mItems.get(position));
+                        intent.putExtra("doctorID", doctorID);
+                        intent.putExtra("doctorName",doctorName);
+                        intent.putExtra("hospitalID",hospitalID);
+                        intent.putExtra("userID", userID);
+                        intent.putExtra("year", year);
+                        intent.putExtra("month", month);
+                        intent.putExtra("day", day);
+
+                        startActivity(intent);
+                    }
+                    else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Reservation3Activity.this);
+                        dialog = builder.setMessage("해당 요일은 선생님의 근무요일이 아닙니다.")
+                                .setNegativeButton("확인", null)
+                                .create();
+                        dialog.show();
+                        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                        negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                        negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+                    }
+
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Reservation3Activity.this);
+                    dialog = builder.setMessage("해당 요일은 예약할 수 없습니다.")
+                            .setNegativeButton("확인", null)
+                            .create();
+                    dialog.show();
+                    Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                    negativeButton.setTextColor(Color.parseColor("#FFFFFF"));
+                    negativeButton.setBackgroundColor(Color.parseColor("#000000"));
+                }
             }
             else{
                 AlertDialog.Builder builder = new AlertDialog.Builder(Reservation3Activity.this);

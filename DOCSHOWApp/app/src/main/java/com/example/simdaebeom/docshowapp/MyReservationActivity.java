@@ -45,6 +45,11 @@ public class MyReservationActivity extends AppCompatActivity {
         doctorIDs = intent.getStringArrayListExtra("doctorIDs");
         doctorNames = intent.getStringArrayListExtra("doctorNames");
 
+        int currentDate = Integer.parseInt( new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date()));
+        int currentDay = currentDate%100;
+        int currentMonth = (currentDate%10000)/100;
+        int currentYear = currentDate/10000;
+
 
 
 
@@ -68,9 +73,10 @@ public class MyReservationActivity extends AppCompatActivity {
                     }
                 }
 
-                Reservation reservation = new Reservation(reservationNumber, "의사이름:  "+doctorID, "유저아이디:  "+userID,"날짜:  "+ date,"시간:   "+time);
+                Reservation reservation = new Reservation(reservationNumber, "의사이름:  "+doctorID, "아이디:  "+userID,"날짜:  "+ date,"시간:   "+time);
+                String datetoString = date.replace("-","");
 
-                if(parentID.equals(userID)){
+                if(parentID.equals(userID)&&currentDate<Integer.parseInt(datetoString)){
                     reservationList.add(reservation);
                     saveList.add(reservation);
                      }
