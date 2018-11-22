@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         doctorList = new ArrayList<Doctor>();
-
         Intent intent = getIntent();
         userID =intent.getExtras().getString("userID");
         userPassword = intent.getExtras().getString("userPassword");
@@ -101,6 +100,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new BackgroundTask1().execute();
+            }
+        });
+        Button medicalInfo = (Button)findViewById(R.id.informationButton);
+        medicalInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,MedicalInfoActivity.class);
+                //putExtra...
+
+                MainActivity.this.startActivity(intent);
+
             }
         });
     }
@@ -207,10 +217,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void goInfor(View view) {
-//        Intent MedicalInfoIntent = new Intent(MainActivity.this,MedicalInfoActivity.class);
-//        MainActivity.this.startActivity(MedicalInfoIntent);
-    }
+
 
 
 }

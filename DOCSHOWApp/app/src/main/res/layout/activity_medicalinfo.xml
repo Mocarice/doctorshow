@@ -32,35 +32,20 @@
         </android.support.v7.widget.Toolbar>
 
 
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:orientation="horizontal">
-
-        <Spinner
-            android:id="@+id/yearSpinner"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:gravity="center"
-            android:outlineAmbientShadowColor="#000000"
-            android:scrollbarSize="70dp"></Spinner>
-
-        <Spinner
-            android:id="@+id/monthSpinner"
-            android:layout_width="100dp"
-
-            android:layout_height="wrap_content"
-            android:outlineAmbientShadowColor="#000000"
-            android:scrollbarSize="70dp"></Spinner>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
+        <EditText
+            android:id="@+id/searchDay"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="진료 날짜 검색 예) 2016-01"/>
 
         <ListView
             android:layout_width="match_parent"

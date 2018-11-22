@@ -59,19 +59,13 @@
         android:textSize="20dp"
         android:text="날짜"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ListView
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:gravity="center"
-            android:id="@+id/timeList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </ListView>
-    </LinearLayout>
+    <ListView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:id="@+id/timeList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
 
 </LinearLayout>
