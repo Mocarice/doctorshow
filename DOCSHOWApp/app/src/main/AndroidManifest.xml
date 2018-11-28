@@ -47,7 +47,11 @@
         <activity
             android:name=".QRActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MyReservationActivity"></activity>
+        <activity android:name=".MyReservationActivity"
+            android:parentActivityName=".MainActivity" />
+
+        <activity android:name=".MedicalInfo2Activity"
+            android:parentActivityName=".MedicalInfoActivity" ></activity>
     </application>
 
 </manifest>

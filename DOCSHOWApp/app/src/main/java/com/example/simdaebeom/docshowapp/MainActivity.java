@@ -106,10 +106,7 @@ public class MainActivity extends AppCompatActivity {
         medicalInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MedicalInfoActivity.class);
-                //putExtra...
-
-                MainActivity.this.startActivity(intent);
+               new BackgroundTask2().execute();
 
             }
         });
@@ -211,7 +208,66 @@ public class MainActivity extends AppCompatActivity {
             intent.putStringArrayListExtra("doctorNames",doctorNames);
             intent.putExtra("reservationList", result);
             intent.putExtra("parentID", userID);
+
+
             MainActivity.this.startActivity(intent);
+        }
+
+
+    }
+    class BackgroundTask2 extends AsyncTask<Void, Void, String> {
+        String target;
+
+        @Override
+        protected void onPreExecute() {
+            //blockchain 서버..
+            target = "https://5e4a0982.ngrok.io/api/MedicalRecord";
+
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                URL url = new URL(target);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String temp;
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((temp = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(temp + "\n");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+
+                return stringBuilder.toString().trim();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        public void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            Intent intent = new Intent(MainActivity.this, MedicalInfoActivity.class);
+            result = "{"+"\"response\""+":"+result+"}";
+            intent.putExtra("medicalList", result);
+            intent.putExtra("userID", userID);
+            MainActivity.this.startActivity(intent);
+
+
+
+
+
+
         }
 
 

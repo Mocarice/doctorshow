@@ -103,7 +103,7 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
                         }
                     }
                     //12월일 경우에는 다음해 1월까지 예약가능
-                    else if (Integer.parseInt(year) > Integer.parseInt(currentMonth) / 100 && Integer.parseInt(month) == Integer.parseInt(currentMonth) % 100 - 11 && currentDate % 100 >= Integer.parseInt(day)) {
+                    else if (Integer.parseInt(year) > Integer.parseInt(currentMonth) / 100 ) {
                         if (dayOfWork.equals("1")) {
                             if (position % 7 == 1 || position % 7 == 3 || position % 7 == 5) {
                                 view.setBackgroundColor(Color.parseColor("#54d482"));
@@ -115,7 +115,7 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
                         }
                     }
                     //현재 날짜에서 한달 이후의 날짜까지만 예약가능
-                    else if (Integer.parseInt(year) == Integer.parseInt(currentMonth) / 100 && Integer.parseInt(month) == Integer.parseInt(currentMonth) % 100 + 1 && currentDate % 100 >= Integer.parseInt(day)) {
+                    else if (Integer.parseInt(year) == Integer.parseInt(currentMonth) / 100 && Integer.parseInt(month) > Integer.parseInt(currentMonth)%100) {
                         if (dayOfWork.equals("1")) {
                             if (position % 7 == 1 || position % 7 == 3 || position % 7 == 5) {
                                 view.setBackgroundColor(Color.parseColor("#54d482"));
@@ -240,7 +240,7 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
                     dialogCannotReservation();
                 }
 
-            } else if (Integer.parseInt(year) > Integer.parseInt(currentMonth) / 100 && Integer.parseInt(month) == Integer.parseInt(currentMonth) % 100 - 11 && currentDate % 100 >= Integer.parseInt(day)) {
+            } else if (Integer.parseInt(year) > Integer.parseInt(currentMonth) / 100 ) {
                 if (dayOfWork.equals("1")) {
 
                     if (position % 7 == 1 || position % 7 == 3 || position % 7 == 5) {
@@ -261,7 +261,7 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
                 } else {
                     dialogCannotReservation();
                 }
-            } else if (Integer.parseInt(year) == Integer.parseInt(currentMonth) / 100 && Integer.parseInt(month) == Integer.parseInt(currentMonth) % 100 + 1 && currentDate % 100 >= Integer.parseInt(day)) {
+            } else if (Integer.parseInt(year) == Integer.parseInt(currentMonth) / 100 && Integer.parseInt(month) > Integer.parseInt(currentMonth)%100 ) {
                 if (dayOfWork.equals("1")) {
 
                     if (position % 7 == 1 || position % 7 == 3 || position % 7 == 5) {
@@ -278,8 +278,9 @@ public class Reservation3Activity extends AppCompatActivity implements View.OnCl
                         dialogNotDoctorDay();
                     }
 
-                } else {
-                    dialogCannotReservation();
+                }
+                else {
+                    dialogNotDoctorDay();
                 }
             } else {
                 dialogCannotReservation();
