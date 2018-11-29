@@ -56,38 +56,7 @@ public class QRActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         showQR();
-//        //현재시간
-//        long now = System.currentTimeMillis();
-//        Date date = new Date(now);
-//        SimpleDateFormat sdfNow = new SimpleDateFormat("yyyyMMddHHmm");
-//        currentTime = sdfNow.format(date);
-//
-//        SecurityUtil securityUtil = new SecurityUtil();
-//        currentTime= securityUtil.encryptSHA256(currentTime);
-//
-//        Intent intent = getIntent();
-//        //qrCode는 현재yyyymmddhhmm+userPassword의 해쉬화된 값.
-//        qrCode =currentTime+intent.getExtras().getString("userPassword");
-//        qrImage = (ImageView) findViewById(R.id.QR_Image);
-//
-//        WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
-//        Display display = manager.getDefaultDisplay();
-//        Point point = new Point();
-//        display.getSize(point);
-//        int width = point.x;
-//        int height = point.y;
-//        int smallerDimension = width < height ? width : height;
-//        ////QR 코드화
-//        qrgEncoder = new QRGEncoder(
-//                qrCode, null,
-//                QRGContents.Type.TEXT,
-//                smallerDimension);
-//        try {
-//            bitmap = qrgEncoder.encodeAsBitmap();
-//            qrImage.setImageBitmap(bitmap);
-//        } catch (WriterException e) {
-//            Log.v(TAG, e.toString());
-//        }
+
 
 
     }
@@ -109,13 +78,14 @@ public class QRActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-//                Log.i("Test", "Timer start");
                 Update();
 
             }
         };
         Timer timer = new Timer();
-        timer.schedule(second, 1000, 3000);
+
+
+        timer.schedule(second, 1000, 300000);
     }
 
     protected void Update() {
@@ -125,14 +95,12 @@ public class QRActivity extends AppCompatActivity {
                 Date date = new Date(now);
                 SimpleDateFormat sdfNow = new SimpleDateFormat("yyyyMMddHHmm");
                 currentTime = sdfNow.format(date);
-                int a=0;
-
                 SecurityUtil securityUtil = new SecurityUtil();
                 currentTime= securityUtil.encryptSHA256(currentTime);
 
                 Intent intent = getIntent();
                 //qrCode는 현재yyyymmddhhmm+userPassword의 해쉬화된 값.
-                qrCode =currentTime+"//"+intent.getExtras().getString("userPassword");
+                qrCode =currentTime+intent.getExtras().getString("userID");
                 qrImage = (ImageView) findViewById(R.id.QR_Image);
 
                 WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);

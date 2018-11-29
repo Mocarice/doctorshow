@@ -45,7 +45,7 @@
             android:layout_marginLeft="20dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="진료 날짜 검색 예) 2016-01"/>
+            android:hint="진료 날짜 검색 예) 20160101"/>
 
         <ListView
             android:layout_width="match_parent"

@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent qrIntent = new Intent(MainActivity.this,QRActivity.class);
-                qrIntent.putExtra("userPassword", userPassword);
+                qrIntent.putExtra("userID", userID);
                 MainActivity.this.startActivity(qrIntent);
             }
         });
@@ -221,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             //blockchain 서버..
-            target = "https://5e4a0982.ngrok.io/api/MedicalRecord";
+            target = "http://edabae2c.ngrok.io/api/queries/getMedicalRecordOfPatient?patientID="+userID;
 
 
         }
@@ -261,6 +260,7 @@ public class MainActivity extends AppCompatActivity {
             result = "{"+"\"response\""+":"+result+"}";
             intent.putExtra("medicalList", result);
             intent.putExtra("userID", userID);
+            intent.putExtra("userPassword",userPassword);
             MainActivity.this.startActivity(intent);
 
 
