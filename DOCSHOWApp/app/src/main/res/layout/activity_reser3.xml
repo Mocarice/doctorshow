@@ -51,7 +51,7 @@
                 android:gravity="center"
                 android:text="요일"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="15dp"
 
                 />
         </android.support.v7.widget.Toolbar>

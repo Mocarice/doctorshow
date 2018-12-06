@@ -2,6 +2,7 @@ package com.example.simdaebeom.docshowapp;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -65,12 +66,7 @@ public class  RegisterActivity extends AppCompatActivity {
 
            @Override
            public void afterTextChanged(Editable s) {
-//               if((passwordText.getText().toString()).equals(confirm.getText().toString())){
-//                   confirm.setError("비밀번호가 같습니다.");
-//               }else{
-//                   confirm.setError("비밀번호가 다릅니다.");
-//
-//               }
+
 
            }
        });
@@ -215,7 +211,15 @@ public class  RegisterActivity extends AppCompatActivity {
                                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
                                positiveButton.setTextColor(Color.parseColor("#FFFFFF"));
                                positiveButton.setBackgroundColor(Color.parseColor("#000000"));
-                               finish();
+
+                               new Handler().postDelayed(new Runnable()
+                               {
+                                   @Override
+                                   public void run()
+                                   {
+                                       finish();
+                                   }
+                               }, 1000);
 
                            }
                            else{

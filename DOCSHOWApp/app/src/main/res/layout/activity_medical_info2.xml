@@ -42,7 +42,7 @@
 
         <TextView
             android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#000000"
             android:textColor="#ffffff"
             android:text="질병"
@@ -50,13 +50,13 @@
             />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
 
             android:id="@+id/disease"/>
         <TextView
             android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="20dp"
 
             android:background="#000000"
@@ -64,13 +64,13 @@
             android:text="진료 내용"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
 
             android:id="@+id/medicalContents"/>
         <TextView
             android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#000000"
             android:textColor="#ffffff"
             android:textSize="20dp"
@@ -78,27 +78,25 @@
             android:text="환자 아이디"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="20dp"
-
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
             android:id="@+id/patientID"/>
         <TextView
             android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="20dp"
-
             android:background="#000000"
             android:textColor="#ffffff"
-            android:text="의사 아이디"/>
+            android:text="의사 이름"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
 
             android:id="@+id/doctorID"/>
         <TextView
             android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="20dp"
 
             android:background="#000000"
@@ -106,9 +104,8 @@
             android:text="날 짜"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="20dp"
-
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
             android:id="@+id/date"/>
 
     </LinearLayout>

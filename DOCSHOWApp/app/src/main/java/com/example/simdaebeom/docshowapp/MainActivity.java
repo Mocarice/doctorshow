@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             //blockchain 서버..
-            target = "http://edabae2c.ngrok.io/api/queries/getMedicalRecordOfPatient?patientID="+userID;
+            target = "http://62862835.ngrok.io/api/queries/getMedicalRecordOfPatient?patientID="+userID;
 
 
         }
@@ -235,6 +235,8 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("medicalList", result);
             intent.putExtra("userID", userID);
             intent.putExtra("userPassword",userPassword);
+            intent.putStringArrayListExtra("doctorIDs",doctorIDs);
+            intent.putStringArrayListExtra("doctorNames",doctorNames);
             MainActivity.this.startActivity(intent);
 
 
@@ -323,6 +325,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
 
 
 
