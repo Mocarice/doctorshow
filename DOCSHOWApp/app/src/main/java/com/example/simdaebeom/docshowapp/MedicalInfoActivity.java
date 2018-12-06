@@ -120,7 +120,7 @@ public class MedicalInfoActivity extends AppCompatActivity  {
                 MedicalRecord medicalRecord = new MedicalRecord(medicalRecordID, disease, medicalContents, patientID,doctorID,date);
                 medicalRecords.add(medicalRecord);
                 saveList.add(medicalRecord);
-                adapterDate.add(date);
+                adapterDate.add(date.substring(0,4)+"년"+date.substring(4,6)+"월"+date.substring(6,8)+"일");
 
                 ////////////
 
@@ -135,7 +135,7 @@ public class MedicalInfoActivity extends AppCompatActivity  {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     for(int i=0;i<medicalRecords.size();i++)
                     {
-                        if(medicalRecords.get(i).getDate().equals(listDate.get(position))){
+                        if(medicalRecords.get(i).getDate().equals(listDate.get(position).replace("년","").replace("월","").replace("일",""))){
                             Intent intent = new Intent(MedicalInfoActivity.this, MedicalInfo2Activity.class);
                             intent.putExtra("disease",medicalRecords.get(i).getDisease());
                             intent.putExtra("medicalContents",medicalRecords.get(i).getMedicalContents());
