@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new BackgroundTask().execute();
+//                new BackgroundTask().execute();
                 final String userID = idText.getText().toString();
                 String userPassword = passwordText.getText().toString();
                 SecurityUtil securityUtil = new SecurityUtil();
@@ -64,14 +64,14 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                 intent.putExtra("userID",userID);
                                 intent.putExtra("userPassword",userPassword);
-                                intent.putExtra("doctors",doctors);
+//                                intent.putExtra("doctors",doctors);
                                 LoginActivity.this.startActivity(intent);
 
                             }
                             else{
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 builder.setMessage("로그인에 실패하였습니다.").setNegativeButton("다시 시도",null)
-                                        ;
+                                ;
                                 AlertDialog dialog = builder.create();
                                 dialog.show();
                                 Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
@@ -93,49 +93,49 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    class BackgroundTask extends AsyncTask<Void, Void, String> {
-        String target;
-
-        @Override
-        protected void onPreExecute() {
-            target = "http://debum93.cafe24.com/Doctor.php";
-
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            try {
-                URL url = new URL(target);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String temp;
-                StringBuilder stringBuilder = new StringBuilder();
-                while ((temp = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(temp + "\n");
-                }
-                bufferedReader.close();
-                inputStream.close();
-                httpURLConnection.disconnect();
-
-                return stringBuilder.toString().trim();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        public void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        public void onPostExecute(String result) {
-
-           doctors = result;
-        }
-
-
-    }
+//    class BackgroundTask extends AsyncTask<Void, Void, String> {
+//        String target;
+//
+//        @Override
+//        protected void onPreExecute() {
+//            target = "http://debum93.cafe24.com/Doctor.php";
+//
+//        }
+//
+//        @Override
+//        protected String doInBackground(Void... voids) {
+//            try {
+//                URL url = new URL(target);
+//                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+//                InputStream inputStream = httpURLConnection.getInputStream();
+//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+//                String temp;
+//                StringBuilder stringBuilder = new StringBuilder();
+//                while ((temp = bufferedReader.readLine()) != null) {
+//                    stringBuilder.append(temp + "\n");
+//                }
+//                bufferedReader.close();
+//                inputStream.close();
+//                httpURLConnection.disconnect();
+//
+//                return stringBuilder.toString().trim();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        public void onProgressUpdate(Void... values) {
+//            super.onProgressUpdate(values);
+//        }
+//
+//        @Override
+//        public void onPostExecute(String result) {
+//
+//            doctors = result;
+//        }
+//
+//
+//    }
 }

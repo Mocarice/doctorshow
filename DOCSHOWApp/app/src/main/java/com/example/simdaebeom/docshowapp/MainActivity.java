@@ -44,37 +44,10 @@ public class MainActivity extends AppCompatActivity {
         userID =intent.getExtras().getString("userID");
         userPassword = intent.getExtras().getString("userPassword");
 
-        try {
-            JSONObject jsonObject = new JSONObject(intent.getStringExtra("doctors"));
-            JSONArray jsonArray = jsonObject.getJSONArray("response");
-            int count = 0;
-            String doctorID,doctorName,hospitalID,department,telephone,dayOfWork;
-            while (count < jsonArray.length()) {
-                JSONObject object = jsonArray.getJSONObject(count);
-                doctorID = object.getString("doctorID");
-                doctorName = object.getString("doctorName");
-                hospitalID = object.getString("hospitalID");
-                department = object.getString("department");
-                telephone = object.getString("telephone");
-                dayOfWork = object.getString("dayOfWork");
 
 
-                Doctor doctor = new Doctor(doctorID,doctorName,hospitalID,department,telephone,dayOfWork);
+        new BackgroundTask3().execute();
 
-                doctorList.add(doctor);
-
-                count++;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        for(int i=0;i<doctorList.size();i++){
-            doctorIDs.add(doctorList.get(i).doctorID);
-            doctorNames.add(doctorList.get(i).doctorName);
-
-        }
 
 
         final Button reservationButton = (Button)findViewById(R.id.reservationButton);
@@ -106,10 +79,8 @@ public class MainActivity extends AppCompatActivity {
         medicalInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MedicalInfoActivity.class);
-                //putExtra...
+                new BackgroundTask2().execute();
 
-                MainActivity.this.startActivity(intent);
 
             }
         });
@@ -217,10 +188,143 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    class BackgroundTask2 extends AsyncTask<Void, Void, String> {
+        String target;
+
+        @Override
+        protected void onPreExecute() {
+            //blockchain 서버..
+            target = "http://edabae2c.ngrok.io/api/queries/getMedicalRecordOfPatient?patientID="+userID;
+
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                URL url = new URL(target);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String temp;
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((temp = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(temp + "\n");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+
+                return stringBuilder.toString().trim();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        public void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            Intent intent = new Intent(MainActivity.this, MedicalInfoActivity.class);
+            result = "{"+"\"response\""+":"+result+"}";
+            intent.putExtra("medicalList", result);
+            intent.putExtra("userID", userID);
+            intent.putExtra("userPassword",userPassword);
+            MainActivity.this.startActivity(intent);
+
+
+
+
+
+
+        }
+
+
+    }
+
+    class BackgroundTask3 extends AsyncTask<Void, Void, String> {
+        String target;
+
+        @Override
+        protected void onPreExecute() {
+            target = "http://debum93.cafe24.com/Doctor.php";
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                URL url = new URL(target);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String temp;
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((temp = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(temp + "\n");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return stringBuilder.toString().trim();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        public void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+
+            doctors = result;
+
+            try {
+                JSONObject jsonObject = new JSONObject(doctors);
+                JSONArray jsonArray = jsonObject.getJSONArray("response");
+                int count = 0;
+                String doctorID,doctorName,hospitalID,department,telephone,dayOfWork;
+                while (count < jsonArray.length()) {
+                    JSONObject object = jsonArray.getJSONObject(count);
+                    doctorID = object.getString("doctorID");
+                    doctorName = object.getString("doctorName");
+                    hospitalID = object.getString("hospitalID");
+                    department = object.getString("department");
+                    telephone = object.getString("telephone");
+                    dayOfWork = object.getString("dayOfWork");
+
+
+                    Doctor doctor = new Doctor(doctorID,doctorName,hospitalID,department,telephone,dayOfWork);
+
+                    doctorList.add(doctor);
+
+                    count++;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+            for(int i=0;i<doctorList.size();i++){
+                doctorIDs.add(doctorList.get(i).doctorID);
+                doctorNames.add(doctorList.get(i).doctorName);
+
+            }
+        }
+
+
+    }
+
 
 
 
 }
-
-
-

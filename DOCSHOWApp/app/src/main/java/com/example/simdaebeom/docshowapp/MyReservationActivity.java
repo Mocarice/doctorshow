@@ -13,9 +13,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MyReservationActivity extends AppCompatActivity {
+
 
     private ListView listView;
     private List<Reservation> reservationList;
@@ -76,12 +78,16 @@ public class MyReservationActivity extends AppCompatActivity {
                 Reservation reservation = new Reservation(reservationNumber, "의사이름:  "+doctorID, "아이디:  "+userID,"날짜:  "+ date,"시간:   "+time);
                 String datetoString = date.replace("-","");
 
-                if(parentID.equals(userID)&&currentDate<Integer.parseInt(datetoString)){
+                if(parentID.equals(userID)&&currentDate<Integer.parseInt(datetoString)) {
                     reservationList.add(reservation);
                     saveList.add(reservation);
-                     }
+                }
+
+
+
                 count++;
             }
+
             adapter = new ReservationListAdapter(getApplicationContext(), reservationList, saveList);
             listView.setAdapter(adapter);
         } catch (Exception e) {
@@ -101,6 +107,7 @@ public class MyReservationActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 
 }

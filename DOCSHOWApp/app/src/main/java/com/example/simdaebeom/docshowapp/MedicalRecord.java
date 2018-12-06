@@ -1,42 +1,29 @@
 package com.example.simdaebeom.docshowapp;
 
 public class MedicalRecord {
-    String recordNumber;
-    String doctorID;
-    String specialNote;
+    String medicalRecordID;
     String disease;
-    String prescription;
-    String smoking;
+    String medicalContents;
     String patientID;
-    String dateOfExamination;
+    String doctorID;
+    String date;
 
 
-
-    public MedicalRecord(String recordNumber, String doctorID, String specialNote, String disease, String prescription, String smoking, String patientID, String dateOfExamination) {
-        this.recordNumber = recordNumber;
-        this.doctorID = doctorID;
-        this.specialNote = specialNote;
+    public MedicalRecord(String medicalRecordID, String disease, String medicalContents, String patientID, String doctorID, String date) {
+        this.medicalRecordID = medicalRecordID;
         this.disease = disease;
-        this.prescription = prescription;
-        this.smoking = smoking;
+        this.medicalContents = medicalContents;
         this.patientID = patientID;
-        this.dateOfExamination = dateOfExamination;
-    }
-
-    public String getDoctorID() {
-        return doctorID;
-    }
-
-    public void setDoctorID(String doctorID) {
         this.doctorID = doctorID;
+        this.date = date;
     }
 
-    public String getSpecialNote() {
-        return specialNote;
+    public String getMedicalRecordID() {
+        return medicalRecordID;
     }
 
-    public void setSpecialNote(String specialNote) {
-        this.specialNote = specialNote;
+    public void setMedicalRecordID(String medicalRecordID) {
+        this.medicalRecordID = medicalRecordID;
     }
 
     public String getDisease() {
@@ -47,20 +34,12 @@ public class MedicalRecord {
         this.disease = disease;
     }
 
-    public String getPrescription() {
-        return prescription;
+    public String getMedicalContents() {
+        return medicalContents;
     }
 
-    public void setPrescription(String prescription) {
-        this.prescription = prescription;
-    }
-
-    public String getSmoking() {
-        return smoking;
-    }
-
-    public void setSmoking(String smoking) {
-        this.smoking = smoking;
+    public void setMedicalContents(String medicalContents) {
+        this.medicalContents = medicalContents;
     }
 
     public String getPatientID() {
@@ -71,20 +50,20 @@ public class MedicalRecord {
         this.patientID = patientID;
     }
 
-    public String getDateOfExamination() {
-        return dateOfExamination;
+    public String getDoctorID() {
+        return doctorID;
     }
 
-    public void setDateOfExamination(String dateOfExamination) {
-        this.dateOfExamination = dateOfExamination;
+    public void setDoctorID(String doctorID) {
+        this.doctorID = doctorID;
     }
 
-    public String getRecordNumber() {
-        return recordNumber;
+    public String getDate() {
+        return date;
     }
 
-    public void setRecordNumber(String recordNumber) {
-        this.recordNumber = recordNumber;
+    public void setDate(String date) {
+        this.date = date;
     }
 }
 

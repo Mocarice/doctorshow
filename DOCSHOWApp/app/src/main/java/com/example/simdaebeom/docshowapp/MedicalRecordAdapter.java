@@ -37,27 +37,25 @@ public class MedicalRecordAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(context,R.layout.medicalrecord,null);
-        TextView recordNumber =(TextView) v.findViewById(R.id.recordNumber);
-        TextView doctorIDinRecord =(TextView) v.findViewById(R.id.doctorIDinRecord);
-        TextView specialNote =(TextView) v.findViewById(R.id.specialNote);
+        TextView medicalRecordID =(TextView) v.findViewById(R.id.medicalRecordID);
         TextView disease =(TextView) v.findViewById(R.id.disease);
-        TextView prescription =(TextView) v.findViewById(R.id.prescription);
-        TextView smoking =(TextView) v.findViewById(R.id.smoking);
+        TextView medicalContents =(TextView) v.findViewById(R.id.medicalContents);
         TextView patientID =(TextView) v.findViewById(R.id.patientID);
-        TextView dateOfExamination =(TextView) v.findViewById(R.id.dateOfExamination);
+        TextView doctorID =(TextView) v.findViewById(R.id.doctorID);
+        TextView date =(TextView) v.findViewById(R.id.date);
 
-        recordNumber.setText(medicalRecords.get(position).getRecordNumber());
-        doctorIDinRecord.setText(medicalRecords.get(position).getDoctorID());
-        specialNote.setText(medicalRecords.get(position).getSpecialNote());
+
+        medicalRecordID.setText(medicalRecords.get(position).getMedicalRecordID());
         disease.setText(medicalRecords.get(position).getDisease());
-        prescription.setText(medicalRecords.get(position).getPrescription());
-        smoking.setText(medicalRecords.get(position).getSmoking());
+        medicalContents.setText(medicalRecords.get(position).getMedicalContents());
         patientID.setText(medicalRecords.get(position).getPatientID());
-        dateOfExamination.setText(medicalRecords.get(position).getDateOfExamination());
+        doctorID.setText(medicalRecords.get(position).getDoctorID());
+        patientID.setText(medicalRecords.get(position).getPatientID());
+        date.setText(medicalRecords.get(position).getDate());
 
 
 
-        v.setTag(medicalRecords.get(position).getRecordNumber());
+        v.setTag(medicalRecords.get(position).getMedicalRecordID());
         return v;
 
 

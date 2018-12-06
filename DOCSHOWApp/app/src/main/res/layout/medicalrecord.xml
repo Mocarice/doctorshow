@@ -22,8 +22,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/recordNumber"
-            android:text="recordNumber"
+            android:id="@+id/medicalRecordID"
+            android:text="medicalRecordID"
             android:textSize="20dp"
             android:textColor="#000000"
             android:visibility="gone"
@@ -31,53 +31,40 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/doctorIDinRecord"
-            android:text="doctorID"
+            android:id="@+id/disease"
+            android:text="disease"
             android:textSize="20dp"
             android:textColor="#000000"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/specialNote"
-            android:text="특이사항"
-            android:textSize="20dp"
-            android:textColor="#000000"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/disease"
-            android:text="질병"
-            android:textSize="20dp"
-            android:textColor="#000000"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/prescription"
-            android:text="처방"
-            android:textSize="20dp"
-            android:textColor="#000000"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/smoking"
-            android:text="흡연여부"
+            android:id="@+id/medicalContents"
+            android:text="medicalContents"
             android:textSize="20dp"
             android:textColor="#000000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/patientID"
-            android:text="환자ID"
+            android:text="patientID"
             android:textSize="20dp"
             android:textColor="#000000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/dateOfExamination"
-            android:text="진료날짜"
+            android:id="@+id/doctorID"
+            android:text="doctorID"
             android:textSize="20dp"
             android:textColor="#000000"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:text="date"
+            android:textSize="20dp"
+            android:textColor="#000000"/>
+
 
 
     </LinearLayout>
